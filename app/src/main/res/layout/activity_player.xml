@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/complete_black"
+    tools:context=".PlayerActivity">
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/down_arrow" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/heebo_regular"
+                android:text="PLAYING FROM PLAYLIST"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="10dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/varelaround_regular"
+                android:text="OutStations"
+                android:textAlignment="center"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/more_options" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/music_logo_container"
+        android:layout_width="300dp"
+        android:layout_height="320dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header">
+
+        <ImageView
+            android:id="@+id/music_logo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:src="@drawable/faded"
+            android:layout_marginTop="50dp"
+            android:scaleType="centerCrop" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/info_area"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="66dp"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        app:layout_constraintEnd_toEndOf="@id/music_logo_container"
+        app:layout_constraintStart_toStartOf="@id/music_logo_container"
+        app:layout_constraintTop_toBottomOf="@id/music_logo_container">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/song_name"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="start|center_vertical"
+                android:layout_weight="1"
+                android:fontFamily="@font/heebo_bold"
+                android:text="Faded"
+                android:textAlignment="textStart"
+                android:textColor="@color/white"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/song_artist"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="start|center_vertical"
+                android:layout_weight="1"
+                android:fontFamily="@font/heebo_light"
+                android:gravity="center"
+                android:text="Alan Walker"
+                android:textAlignment="textStart"
+                android:textColor="@color/white"
+                android:textSize="14dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:layout_gravity="end"
+                android:layout_weight="1"
+                android:src="@drawable/heart_icon" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/timer_area"
+        android:layout_width="330dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:weightSum="2"
+        app:layout_constraintEnd_toEndOf="@id/music_logo_container"
+        app:layout_constraintStart_toStartOf="@id/music_logo_container"
+        app:layout_constraintTop_toBottomOf="@id/info_area">
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/start_timer"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/heebo_extralight"
+                android:padding="0dp"
+                android:text="0.05"
+                android:paddingStart="10dp"
+                android:textAlignment="textStart"
+                android:textColor="@color/white"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/end_timer"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/heebo_extralight"
+                android:padding="0dp"
+                android:text="3.33"
+                android:textAlignment="viewEnd"
+                android:textColor="@color/white"
+                android:textSize="12dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/control_area"
+        android:layout_width="320dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:weightSum="8"
+        app:layout_constraintEnd_toEndOf="@id/music_logo_container"
+        app:layout_constraintStart_toStartOf="@id/music_logo_container"
+        app:layout_constraintTop_toBottomOf="@+id/timer_area">
+
+        <ImageView
+            android:id="@+id/shuffle"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_shuffle__icon" />
+
+        <ImageView
+            android:id="@+id/previous"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:layout_weight="2"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_previous_icon" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/play_pause"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
+            android:layout_weight="2"
+            android:clickable="true"
+            android:focusable="true"
+            android:foregroundGravity="center_vertical"
+            android:src="@drawable/ic_play_icon" />
+
+        <ImageView
+            android:id="@+id/next"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:layout_weight="2"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_next_icon" />
+
+        <ImageView
+            android:id="@+id/repeat"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_repeat_icon" />
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="@id/music_logo_container"
+        app:layout_constraintStart_toStartOf="@id/music_logo_container"
+        app:layout_constraintTop_toBottomOf="@id/control_area">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_phonelink_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_playlist_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
