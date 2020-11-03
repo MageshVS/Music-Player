@@ -19,11 +19,12 @@
 
     <TextView
         android:id="@+id/songs_item_text"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="File Name"
-        android:textColor="@color/colorYellow"
+        android:textColor="@color/white"
         android:layout_marginStart="10dp"
+        android:fontFamily="@font/heebo_regular"
         android:layout_alignStart="@id/song_item_image"
         app:layout_constraintStart_toEndOf="@id/song_item_image"
         app:layout_constraintTop_toTopOf="parent"

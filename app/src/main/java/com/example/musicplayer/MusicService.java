@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -21,6 +22,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     ArrayList<MusicFiles> musicFiles = new ArrayList<>();
     Uri uri;
     int position = -1;
+    ActionPlaying actionPlaying;
 
     @Override
     public void onCreate() {
@@ -38,8 +40,20 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         int myPosition = intent.getIntExtra("position", -1);
+        String actionName = intent.getStringExtra("actionName");
+
         if (myPosition != -1){
             playMusic(myPosition);
+        }
+        if (actionName != null){
+            switch (actionName){
+                case "play":
+                    Toast.makeText(this, "PlayPause", Toast.LENGTH_SHORT).show();
+                case "next":
+                    Toast.makeText(this, "Next", Toast.LENGTH_SHORT).show();
+                case "previous":
+                    Toast.makeText(this, "Previous", Toast.LENGTH_SHORT).show();
+            }
         }
         return START_STICKY;
     }
@@ -101,6 +115,11 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     }
     @Override
     public void onCompletion(MediaPlayer mp) {
-
+        if (actionPlaying != null){
+            actionPlaying.nextBtnClicked();
+        }
+        createMediaPlayer(position);
+        mediaPlayer.start();
+        onCompleted();
     }
 }

@@ -46,7 +46,7 @@ public class AlbumDetailsAdapter extends RecyclerView.Adapter<AlbumDetailsAdapte
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, PlayerActivity.class);
-                intent.putExtra("sender", "albumDetails");
+                intent.putExtra("sender", "albumD etails");
                 intent.putExtra("position", position);
                 context.startActivity(intent);
             }

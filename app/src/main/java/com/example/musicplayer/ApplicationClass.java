@@ -1,20 +1,17 @@
 package com.example.musicplayer;
 
-import android.Manifest;
+
 import android.app.Application;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.os.Build;
 
-import androidx.core.content.ContextCompat;
-
 public class ApplicationClass extends Application {
     public static final String CHANNEL_ID_1 = "channel1";
     public static final String CHANNEL_ID_2 = "channel2";
-    public static final String ACTION_PREVIOUS = "actionPrevious";
-    public static final String ACTION_NEXT = "actionNext";
-    public static final String ACTION_PLAY = "actionPlay";
+    public static final String ACTION_PREVIOUS = "actionprevious";
+    public static final String ACTION_NEXT = "actionnext";
+    public static final String ACTION_PLAY = "actionplay";
 
     @Override
     public void onCreate() {

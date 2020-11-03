@@ -113,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     }
     public static ArrayList<MusicFiles> getAllAudio(Context context){
         ArrayList<String> duplicates = new ArrayList<>();
+        albumArray.clear();
         ArrayList<MusicFiles> tempMusicFile = new ArrayList<>();
         Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         String sortOrder = MediaStore.MediaColumns.DISPLAY_NAME+"";

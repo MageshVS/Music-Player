@@ -24,6 +24,7 @@ public class AlbumDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_album_details);
 
         albumPhoto = findViewById(R.id.album_activity_image);
