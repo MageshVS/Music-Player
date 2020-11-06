@@ -40,13 +40,13 @@ public class AlbumDetailsAdapter extends RecyclerView.Adapter<AlbumDetailsAdapte
         if (image != null){
             Glide.with(context).load(image).into(holder.album_image);
         }else {
-            Glide.with(context).load(R.drawable.music_placeholder).into(holder.album_image);
+            Glide.with(context).load(R.drawable.music_item_placeholder).into(holder.album_image);
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, PlayerActivity.class);
-                intent.putExtra("sender", "albumD etails");
+                intent.putExtra("sender", "albumDetails");
                 intent.putExtra("position", position);
                 context.startActivity(intent);
             }

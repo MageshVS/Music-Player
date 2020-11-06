@@ -50,7 +50,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
         if (image != null){
             Glide.with(context).load(image).into(holder.songImage);
         }else {
-            Glide.with(context).load(R.drawable.music_placeholder).into(holder.songImage);
+            Glide.with(context).load(R.drawable.music_item_placeholder).into(holder.songImage);
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

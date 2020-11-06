@@ -41,7 +41,7 @@ public class AlbumDetailsActivity extends AppCompatActivity {
         if (albumImage != null){
             Glide.with(this).load(albumImage).into(albumPhoto);
         }else{
-            Glide.with(this).load(R.drawable.music_placeholder).into(albumPhoto);
+            Glide.with(this).load(R.drawable.music_item_placeholder).into(albumPhoto);
         }
     }
 

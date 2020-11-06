@@ -12,6 +12,7 @@
         android:layout_height="60dp"
         android:background="@drawable/complete_black"
         android:padding="4dp"
+        android:scaleType="centerCrop"
         android:id="@+id/song_item_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

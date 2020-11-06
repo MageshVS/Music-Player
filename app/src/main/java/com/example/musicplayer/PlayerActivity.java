@@ -169,7 +169,7 @@ public class PlayerActivity extends AppCompatActivity implements ServiceConnecti
             playBtn.setImageResource(R.drawable.ic_pause_icon);
             uri = Uri.parse(allSongs.get(position).getPath());
         }
-        showNotification(R.drawable.ic_pause_icon);
+        showNotification(R.drawable.notification_pause_icon);
         Intent intent = new Intent(this, MusicService.class);
         intent.putExtra("position", position);
         startService(intent);
@@ -220,7 +220,7 @@ public class PlayerActivity extends AppCompatActivity implements ServiceConnecti
                 }
             });
         } else {
-            Glide.with(this).load(R.drawable.music_placeholder).into(cover_art);
+            Glide.with(this).load(R.drawable.music_item_placeholder).into(cover_art);
             ImageView gradient = findViewById(R.id.ImageView_logo_gradient);
             RelativeLayout container = findViewById(R.id.music_logo_container);
             gradient.setBackgroundResource(R.drawable.music_logo_gradient);
@@ -279,13 +279,13 @@ public class PlayerActivity extends AppCompatActivity implements ServiceConnecti
 
     public void playPauseBtnClicked() {
         if (musicService.isPlaying()) {
-            showNotification(R.drawable.ic_play_arrow_black_24dp);
             playBtn.setImageResource(R.drawable.ic_play_arrow_black_24dp);
+            showNotification(R.drawable.notification_play_icon);
             musicService.pause();
             seekBar.setMax(musicService.getDuration() / 1000);
         } else {
-            //showNotification(R.drawable.ic_pause_icon);
             playBtn.setImageResource(R.drawable.ic_pause_icon);
+            showNotification(R.drawable.notification_pause_icon);
             musicService.start();
             seekBar.setMax(musicService.getDuration() / 1000);
         }
@@ -317,12 +317,12 @@ public class PlayerActivity extends AppCompatActivity implements ServiceConnecti
         runPlayer(position);
         musicService.onCompleted();
         if (musicService.isPlaying()) {
-            showNotification(R.drawable.ic_pause_icon);
-            playBtn.setBackgroundResource(R.drawable.ic_pause_icon);
+            playBtn.setImageResource(R.drawable.ic_play_arrow_black_24dp);
+            showNotification(R.drawable.notification_play_icon);
             musicService.start();
         } else {
-            showNotification(R.drawable.ic_play_arrow_black_24dp);
-            playBtn.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
+            playBtn.setImageResource(R.drawable.ic_pause_icon);
+            showNotification(R.drawable.notification_pause_icon);
             musicService.start();
         }
     }
@@ -357,12 +357,12 @@ public class PlayerActivity extends AppCompatActivity implements ServiceConnecti
         runPlayer(position);
         musicService.onCompleted();
         if (musicService.isPlaying()) {
-            showNotification(R.drawable.ic_pause_icon);
-            playBtn.setBackgroundResource(R.drawable.ic_pause_icon);
+            showNotification(R.drawable.notification_play_icon);
+            playBtn.setImageResource(R.drawable.ic_play_arrow_black_24dp);
             musicService.start();
         } else {
-            showNotification(R.drawable.ic_play_arrow_black_24dp);
-            playBtn.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
+            showNotification(R.drawable.notification_pause_icon);
+            playBtn.setImageResource(R.drawable.ic_pause_icon);
             musicService.start();
         }
     }
@@ -465,7 +465,7 @@ public class PlayerActivity extends AppCompatActivity implements ServiceConnecti
         if (picture != null){
             thumb = BitmapFactory.decodeByteArray(picture, 0, picture.length);
         }else {
-            thumb = BitmapFactory.decodeResource(getResources(), R.drawable.faded);
+            thumb = BitmapFactory.decodeResource(getResources(), R.drawable.music_item_placeholder);
         }
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID_2)
                 .setSmallIcon(playPauseBtn)

@@ -40,7 +40,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.MyAlbumViewH
         if (image != null){
             Glide.with(context).load(image).into(holder.album_image);
         }else {
-            Glide.with(context).load(R.drawable.music_placeholder).into(holder.album_image);
+            Glide.with(context).load(R.drawable.music_item_placeholder).into(holder.album_image);
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
