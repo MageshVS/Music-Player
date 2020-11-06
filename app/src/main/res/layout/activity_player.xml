@@ -240,7 +240,7 @@
             android:clickable="true"
             android:focusable="true"
             app:fabSize="normal"
-            android:src="@drawable/ic_pause_icon" />
+            android:src="@drawable/ic_play_arrow_black_24dp" />
 
         <ImageView
             android:id="@+id/next"

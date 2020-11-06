@@ -284,7 +284,7 @@ public class PlayerActivity extends AppCompatActivity implements ServiceConnecti
             musicService.pause();
             seekBar.setMax(musicService.getDuration() / 1000);
         } else {
-            showNotification(R.drawable.ic_pause_icon);
+            //showNotification(R.drawable.ic_pause_icon);
             playBtn.setImageResource(R.drawable.ic_pause_icon);
             musicService.start();
             seekBar.setMax(musicService.getDuration() / 1000);
@@ -363,7 +363,7 @@ public class PlayerActivity extends AppCompatActivity implements ServiceConnecti
         } else {
             showNotification(R.drawable.ic_play_arrow_black_24dp);
             playBtn.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
-            //musicService.start();
+            musicService.start();
         }
     }
 
@@ -397,6 +397,7 @@ public class PlayerActivity extends AppCompatActivity implements ServiceConnecti
     public void onServiceConnected(ComponentName name, IBinder service) {
         MusicService.MyBinder myBinder = (MusicService.MyBinder) service;
         musicService = myBinder.getService();
+        musicService.setCallBacks(this);
         Toast.makeText(this, "connection binded", Toast.LENGTH_SHORT).show();
         seekBar.setMax(musicService.getDuration() / 1000);
         metaData(uri);

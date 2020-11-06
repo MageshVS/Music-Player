@@ -48,11 +48,23 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         if (actionName != null){
             switch (actionName){
                 case "play":
+                    if (actionPlaying != null){
+                        actionPlaying.playPauseBtnClicked();
+                    }
                     Toast.makeText(this, "PlayPause", Toast.LENGTH_SHORT).show();
+                    break;
                 case "next":
+                    if (actionPlaying != null){
+                        actionPlaying.nextBtnClicked();
+                    }
                     Toast.makeText(this, "Next", Toast.LENGTH_SHORT).show();
+                    break;
                 case "previous":
+                    if (actionPlaying != null){
+                        actionPlaying.prevBtnClicked();
+                    }
                     Toast.makeText(this, "Previous", Toast.LENGTH_SHORT).show();
+                    break;
             }
         }
         return START_STICKY;
@@ -118,8 +130,11 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         if (actionPlaying != null){
             actionPlaying.nextBtnClicked();
         }
-        createMediaPlayer(position);
+        createMediaPlayer(position + 1);
         mediaPlayer.start();
         onCompleted();
+    }
+    public void setCallBacks(ActionPlaying actionPlaying){
+        this.actionPlaying = actionPlaying;
     }
 }

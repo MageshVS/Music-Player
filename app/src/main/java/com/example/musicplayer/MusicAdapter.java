@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -115,7 +116,13 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
 
     private byte[] getAlbumArt(String uri){
         MediaMetadataRetriever retriever = new MediaMetadataRetriever();
-        retriever.setDataSource(uri);
+
+        try {
+            retriever.setDataSource(uri);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("RaviShankar", "getAlbumArt: ",e );
+        }
         byte[] art = retriever.getEmbeddedPicture();
         retriever.release();
         return art;
