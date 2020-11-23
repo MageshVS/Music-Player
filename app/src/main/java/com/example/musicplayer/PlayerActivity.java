@@ -62,11 +62,10 @@ public class PlayerActivity extends AppCompatActivity implements ServiceConnecti
     boolean shuffleBoolean = false, repeatBoolean = false;
 
     static Uri uri;
-    //static MediaPlayer mediaPlayer;
     private Handler handler = new Handler();
     private Thread playThread, prevThread, nextThread;
     MusicService musicService;
-    MediaSessionCompat mediaSessionCompat;
+
 
     public static final String TAG = PlayerActivity.class.getSimpleName();
 
@@ -76,7 +75,7 @@ public class PlayerActivity extends AppCompatActivity implements ServiceConnecti
         setFullScreen();
         setContentView(R.layout.activity_player);
         getSupportActionBar().hide();
-        mediaSessionCompat = new MediaSessionCompat(getBaseContext(), "MyAudio");
+
         initViews();
         getIntentMethod();
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -169,7 +168,7 @@ public class PlayerActivity extends AppCompatActivity implements ServiceConnecti
             playBtn.setImageResource(R.drawable.ic_pause_icon);
             uri = Uri.parse(allSongs.get(position).getPath());
         }
-        showNotification(R.drawable.notification_pause_icon);
+
         Intent intent = new Intent(this, MusicService.class);
         intent.putExtra("position", position);
         startService(intent);
@@ -280,12 +279,12 @@ public class PlayerActivity extends AppCompatActivity implements ServiceConnecti
     public void playPauseBtnClicked() {
         if (musicService.isPlaying()) {
             playBtn.setImageResource(R.drawable.ic_play_arrow_black_24dp);
-            showNotification(R.drawable.notification_play_icon);
+            musicService.showNotification(R.drawable.notification_play_icon);
             musicService.pause();
             seekBar.setMax(musicService.getDuration() / 1000);
         } else {
             playBtn.setImageResource(R.drawable.ic_pause_icon);
-            showNotification(R.drawable.notification_pause_icon);
+            musicService.showNotification(R.drawable.notification_pause_icon);
             musicService.start();
             seekBar.setMax(musicService.getDuration() / 1000);
         }
@@ -318,11 +317,11 @@ public class PlayerActivity extends AppCompatActivity implements ServiceConnecti
         musicService.onCompleted();
         if (musicService.isPlaying()) {
             playBtn.setImageResource(R.drawable.ic_play_arrow_black_24dp);
-            showNotification(R.drawable.notification_play_icon);
+            musicService.showNotification(R.drawable.notification_play_icon);
             musicService.start();
         } else {
             playBtn.setImageResource(R.drawable.ic_pause_icon);
-            showNotification(R.drawable.notification_pause_icon);
+            musicService.showNotification(R.drawable.notification_pause_icon);
             musicService.start();
         }
     }
@@ -357,11 +356,11 @@ public class PlayerActivity extends AppCompatActivity implements ServiceConnecti
         runPlayer(position);
         musicService.onCompleted();
         if (musicService.isPlaying()) {
-            showNotification(R.drawable.notification_play_icon);
+            musicService.showNotification(R.drawable.notification_play_icon);
             playBtn.setImageResource(R.drawable.ic_play_arrow_black_24dp);
             musicService.start();
         } else {
-            showNotification(R.drawable.notification_pause_icon);
+            musicService.showNotification(R.drawable.notification_pause_icon);
             playBtn.setImageResource(R.drawable.ic_pause_icon);
             musicService.start();
         }
@@ -404,6 +403,7 @@ public class PlayerActivity extends AppCompatActivity implements ServiceConnecti
         song_name.setText(allSongs.get(position).getTitle());
         song_artist.setText(allSongs.get(position).getArtist());
         musicService.onCompleted();
+        musicService.showNotification(R.drawable.notification_pause_icon);
     }
 
     @Override
@@ -450,43 +450,5 @@ public class PlayerActivity extends AppCompatActivity implements ServiceConnecti
         imageView.startAnimation(animOut);
     }
 
-    public void showNotification(int playPauseBtn){
-        Intent intent = new Intent(this, PlayerActivity.class);
-        PendingIntent contentIntent  = PendingIntent.getActivity(this, 0, intent, 0);
-        Intent prevIntent = new Intent(this, NotificationReceiver.class).setAction(ACTION_PREVIOUS);
-        PendingIntent prevPending  = PendingIntent.getBroadcast(this, 0, prevIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        Intent pauseIntent = new Intent(this, NotificationReceiver.class).setAction(ACTION_PLAY);
-        PendingIntent pausePending  = PendingIntent.getBroadcast(this, 0, pauseIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        Intent nextIntent = new Intent(this, NotificationReceiver.class).setAction(ACTION_NEXT);
-        PendingIntent nextPending  = PendingIntent.getBroadcast(this, 0, nextIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        byte[] picture = null;
-        picture = getAlbumArt(allSongs.get(position).getPath());
-        Bitmap thumb = null;
-        if (picture != null){
-            thumb = BitmapFactory.decodeByteArray(picture, 0, picture.length);
-        }else {
-            thumb = BitmapFactory.decodeResource(getResources(), R.drawable.music_item_placeholder);
-        }
-        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID_2)
-                .setSmallIcon(playPauseBtn)
-                .setLargeIcon(thumb)
-                .setContentTitle(allSongs.get(position).getTitle())
-                .setContentText(allSongs.get(position).getArtist())
-                .addAction(R.drawable.ic_previous_icon, "previous", prevPending)
-                .addAction(playPauseBtn, "Pause", pausePending)
-                .addAction(R.drawable.ic_next_icon, "Next", nextPending)
-                .setStyle(new androidx.media.app.NotificationCompat.MediaStyle()
-                        .setMediaSession(mediaSessionCompat.getSessionToken()))
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .build();
-        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        notificationManager.notify(0, notification);
-    }
-    private byte[] getAlbumArt(String uri){
-        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
-        retriever.setDataSource(uri);
-        byte[] art = retriever.getEmbeddedPicture();
-        retriever.release();
-        return art;
-    }
+
 }
